@@ -11,7 +11,7 @@ import SwiftUI
 struct KittyLauncherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Text("Hi Mom")
         }
     }
 }
