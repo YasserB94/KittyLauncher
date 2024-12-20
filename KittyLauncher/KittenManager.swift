@@ -14,7 +14,9 @@ class KittenManager: ObservableObject {
         do {
             let k = Kitten()
             k.terminationHandler =  { _ in
-                self.kittens = self.kittens.filter({ $0.isRunning })
+                Task { @MainActor in
+                    self.kittens = self.kittens.filter { $0.isRunning }
+                }
             }
             try k.run()
             self.kittens.insert(k)
