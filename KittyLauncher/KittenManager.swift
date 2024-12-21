@@ -12,13 +12,12 @@ class KittenManager: ObservableObject {
 
     public func newKitty() {
         do {
-            let k = Kitten()
-            k.terminationHandler =  { _ in
-                Task { @MainActor in
-                    self.kittens = self.kittens.filter { $0.isRunning }
-                }
+            
+            let k = try Kitten(shell:URL(filePath:"/bin/zsh")) { _ in
+            Task { @MainActor in
+              self.kittens = self.kittens.filter { $0.isRunning }
+              }
             }
-            try k.run()
             self.kittens.insert(k)
         } catch {
             // FIXME: Handle Errors
@@ -37,4 +36,5 @@ class KittenManager: ObservableObject {
             self.kittens.remove(kitten)
         }
     }
+    
 }

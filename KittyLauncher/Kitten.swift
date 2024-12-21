@@ -8,6 +8,36 @@ import Foundation
 
 class Kitten: Identifiable, Hashable, Equatable{
     
+    private static let installPaths = [
+        // Brew Silicon
+         "/opt/homebrew/bin/kitty",
+         // Brew Intel
+         "/usr/local/bin/kitty",
+         // MacPorts
+         "/opt/local/bin/kitty",
+         // App installed
+         "/Applications/kitty.app/Contents/MacOS/kitty",
+         "\(FileManager.default.homeDirectoryForCurrentUser.path)/Applications/kitty.app/Contents/MacOS/kitty",
+         // System-wide
+         "/usr/bin/kitty",
+         // Common paths
+         "/usr/local/bin/kitty",
+         "\(FileManager.default.homeDirectoryForCurrentUser.path)/kitty/bin/kitty",
+         "\(FileManager.default.homeDirectoryForCurrentUser.path)/bin/kitty",
+         "/opt/kitty/bin/kitty"
+    ]
+    
+    public static func getKittyPath() -> String {
+        for path in Kitten.installPaths {
+            if FileManager.default.fileExists(atPath: path) &&
+                FileManager.default.isExecutableFile(atPath: path)
+            {
+             return path
+            }
+        }
+        fatalError("Failed to resolve Kitty executable")
+    }
+    
     private static let emojis: [String] = ["😹", "😻", "🙀", "😿", "🐱", "😽", "😸", "😼", "😾"]
 
     let emoji: String = Kitten.emojis.randomElement() ?? "🐞"
@@ -25,31 +55,24 @@ class Kitten: Identifiable, Hashable, Equatable{
             return process.isRunning
         }
     }
-    var terminationHandler: ((Process) -> Void)? {
-         get { process.terminationHandler }
-         set { process.terminationHandler = newValue }
-     }
     
+    
+    init(shell:URL, onTermination: (@Sendable (Process) -> Void)? = nil) throws {
+        let home = FileManager.default.homeDirectoryForCurrentUser.path
+        self.process = try Process.run(shell, arguments:[Kitten.getKittyPath(), home] ,terminationHandler: onTermination)
+    }
+
     func terminate() {
         process.terminate()
     }
     
-    func run() throws {
-        try process.run()
-    }
-
-    init() {
-        self.process = Process()
-        let home = FileManager.default.homeDirectoryForCurrentUser.path
-        process.launchPath = "/bin/zsh"
-        process.arguments = ["/opt/homebrew/bin/kitty", home]
-    }
-    
+    // MARK: Equatable
     static func == (lhs: Kitten, rhs: Kitten) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    // MARK: Hashable
     func hash(into hasher: inout Hasher) {
           hasher.combine(id)
-      }
-
+    }
 }
