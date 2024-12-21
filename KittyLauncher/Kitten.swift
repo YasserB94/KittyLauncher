@@ -35,6 +35,7 @@ class Kitten: Identifiable, Hashable, Equatable{
              return path
             }
         }
+        // FIXME: Handle errors
         fatalError("Failed to resolve Kitty executable")
     }
     
@@ -57,9 +58,13 @@ class Kitten: Identifiable, Hashable, Equatable{
     }
     
     
-    init(shell:URL, onTermination: (@Sendable (Process) -> Void)? = nil) throws {
+    init(onTermination: (@Sendable (Process) -> Void)? = nil) throws {
         let home = FileManager.default.homeDirectoryForCurrentUser.path
-        self.process = try Process.run(shell, arguments:[Kitten.getKittyPath(), home] ,terminationHandler: onTermination)
+        self.process = try Process.run(
+            URL(filePath:ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/sh"),
+            arguments:[Kitten.getKittyPath(), home] ,
+            terminationHandler: onTermination
+        )
     }
 
     func terminate() {

@@ -13,10 +13,10 @@ class KittenManager: ObservableObject {
     public func newKitty() {
         do {
             
-            let k = try Kitten(shell:URL(filePath:"/bin/zsh")) { _ in
+            let k = try Kitten() { _ in
             Task { @MainActor in
               self.kittens = self.kittens.filter { $0.isRunning }
-              }
+            }
             }
             self.kittens.insert(k)
         } catch {

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct KittyLauncherApp: App {
-    @StateObject private var manager = KittenManager()
+    @StateObject private var manager:KittenManager = KittenManager()
     
     var body: some Scene {
         MenuBarExtra {
