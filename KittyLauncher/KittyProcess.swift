@@ -56,7 +56,7 @@ class KittyProcess {
         
         let process = Process()
         process.executableURL = userShell
-        process.arguments = [kittyPath]
+        process.arguments = [kittyPath, FileManager.default.homeDirectoryForCurrentUser.path()]
         process.terminationHandler = onTermination
         
         let k = KittyProcess(process:process)
