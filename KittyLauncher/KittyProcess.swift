@@ -65,18 +65,9 @@ class KittyProcess {
         return k
     }
     
-    
     private let process:Process
     
-    public let stdOut:Pipe
-    public let stdErr:Pipe
-    
     init(process: Process) {
-        stdOut = Pipe()
-        stdErr = Pipe()
-        process.standardOutput = stdOut
-        process.standardError = stdErr
-        
         self.process = process
     }
     
