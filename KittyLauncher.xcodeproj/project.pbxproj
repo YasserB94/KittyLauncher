@@ -253,7 +253,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KittyLauncher/Preview Content\"";
-				DEVELOPMENT_TEAM = SKBZWZP46A;
+				DEVELOPMENT_TEAM = SW95WPX34U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -263,6 +263,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yasserbal.KittyLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,7 +282,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KittyLauncher/Preview Content\"";
-				DEVELOPMENT_TEAM = SKBZWZP46A;
+				DEVELOPMENT_TEAM = SW95WPX34U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -291,6 +292,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yasserbal.KittyLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
