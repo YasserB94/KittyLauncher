@@ -16,6 +16,8 @@ This should make Kitty launch with the Environment variable modifiers loaded. (a
 
 ## How do I use this app ? 
 
+I included a build in the repo's (KittyLauncher.zip)[./KittyLauncher.zip], though be warned. I did not build this using a valid Developer account.
+
 - Clone this repo.
 - Open the project using Xcode. 
   - Optional: Run the application to see if everything works.
