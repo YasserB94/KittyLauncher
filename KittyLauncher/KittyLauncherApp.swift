@@ -20,8 +20,6 @@ struct KittyLauncherApp: App {
                     KittenMenuView(kitten: kitten)
                 }
                 Divider()
-                kittenCountLabel
-                Divider()
                 if(manager.kittens.count > 0) {
                     killAlllButton
                 } else {
@@ -31,7 +29,6 @@ struct KittyLauncherApp: App {
         } label: {
             menuBarLabel
         }
-        .menuBarExtraStyle(.window)
     }
     
     var menuBarLabel:some View {
@@ -39,14 +36,6 @@ struct KittyLauncherApp: App {
             .resizable()
             .scaledToFit()
             .frame(height:20)
-    }
-    
-    var kittenCountLabel:some View {
-        Text(
-            manager.kittens.count > 0 ?
-            "👵 \(manager.kittens.count) kittens" :
-                "🥺 No kittens"
-        )
     }
     
     var newKittyButton:some View {
